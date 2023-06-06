@@ -7,5 +7,6 @@
     <string name="sigla">DS</string>
     <string name="nome">Desenvolvimento de Sistemas</string>
     <string name="carga_horaria">1200h</string>
+    <string name="nome_studant">1200h</string>
     <string name="title_activity_students">StudentsActivity</string>
 </resources>

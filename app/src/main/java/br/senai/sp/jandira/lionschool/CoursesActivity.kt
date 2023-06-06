@@ -171,6 +171,7 @@ fun CoursesScreen() {
                             .clickable {
                                        var openStudents = Intent(context, StudentsActivity::class.java)
                                         openStudents.putExtra("Curso", "${it.sigla}")
+                                        openStudents.putExtra("Nome", "${it.nome}")
                                         context.startActivity(openStudents)
                             },
                         backgroundColor = Color(51, 71, 176),

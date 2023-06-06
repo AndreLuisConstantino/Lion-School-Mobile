@@ -8,4 +8,6 @@ interface CursoService {
 
     @GET("cursos")
     fun getCurso(): Call<CursoList>
+
+
 }
