@@ -50,8 +50,8 @@ fun HeaderComponent(context: Context) {
             )
         }
         TextButton(onClick = {
-            val openStart = Intent(context, MainActivity::class.java)
-            context.startActivity(openStart)
+            val openCouses = Intent(context, CoursesActivity::class.java)
+            context.startActivity(openCouses)
         }) {
             Image(
                 painter = painterResource(id = R.drawable.arrow),

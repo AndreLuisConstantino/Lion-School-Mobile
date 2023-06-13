@@ -8,6 +8,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -17,6 +18,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -73,7 +75,7 @@ fun StudentsScreen(curso: String, nome: String) {
         )
         {
             //listCurso = response.body()!!.curso
-            listAlunos = response.body()!!.alunos
+            listAlunos = response.body()!!.informacoes
         }
 
         override fun onFailure(call: Call<StudantList>, t: Throwable) {
@@ -119,8 +121,6 @@ fun StudentsScreen(curso: String, nome: String) {
                     .width(305.dp)
                     .height(1.dp)
                     .background(Color(229, 182, 87))
-
-
             )
             Spacer(modifier = Modifier.height(20.dp))
             Text(
@@ -130,26 +130,47 @@ fun StudentsScreen(curso: String, nome: String) {
                     .padding(start = 30.dp),
                 textAlign = TextAlign.Start,
                 fontWeight = FontWeight.Bold,
-                fontSize = 40.sp,
+                fontSize = 30.sp,
                 color = Color(229, 182, 87)
             )
             LazyColumn(){
                 items(listAlunos) {
+
+                    var corStatus = Color(0,0,0)
+
+                    if (it.status.toString() == "Cursando") {
+                        corStatus = Color(229, 182, 87)
+                    } else {
+                        corStatus = Color(51, 71, 176)
+                    }
+
                     Card(
                        modifier = Modifier
                            .size(217.dp, 260.dp)
-                           .padding(horizontal = 0.dp, vertical = 10.dp),
-                        backgroundColor = Color(51, 71, 176),
+                           .padding(horizontal = 0.dp, vertical = 10.dp)
+                           .clickable {
+                               var openStudentGrade = Intent(context, StudantGradeActivity::class.java)
+                               openStudentGrade.putExtra("Matricula", "${it.matricula}")
+                               context.startActivity(openStudentGrade)
+                           },
+                        backgroundColor = corStatus,
                     ) {
-                        Row(
+                        Column(
                             modifier = Modifier
                                 .fillMaxSize(),
-                            horizontalArrangement = Arrangement.SpaceAround,
-                            verticalAlignment = Alignment.CenterVertically
+                            verticalArrangement = Arrangement.SpaceAround,
+                            horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            AsyncImage(model = it.foto, contentDescription = "${it.nome} icon")
+                            AsyncImage(
+                                model = it.foto,
+                                contentDescription = "${it.nome} icon",
+                                modifier = Modifier.size(196.dp, 182.dp)
+                            )
                             Text(
-                                text = it.nome
+                                text = it.nome,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.White,
+                                textAlign = TextAlign.Center
                             )
                         }
                     }

@@ -6,6 +6,6 @@ data class Studant(
     val matricula: String,
     val sexo: String,
     val curso: String,
-    val sigla: String,
-    val status: String
+    val status: String,
+    val dataConclusao: String
 )

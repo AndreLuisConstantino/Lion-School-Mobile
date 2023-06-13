@@ -65,7 +65,7 @@ fun CoursesScreen() {
             response: Response<CursoList>
         )
         {
-            listCurso = response.body()!!.curso
+            listCurso = response.body()!!.cursos
         }
 
         override fun onFailure(call: Call<CursoList>, t: Throwable) {
@@ -169,7 +169,7 @@ fun CoursesScreen() {
                             .size(314.dp, 162.dp)
                             .padding(horizontal = 0.dp, vertical = 10.dp)
                             .clickable {
-                                       var openStudents = Intent(context, StudentsActivity::class.java)
+                                           var openStudents = Intent(context, StudentsActivity::class.java)
                                         openStudents.putExtra("Curso", "${it.sigla}")
                                         openStudents.putExtra("Nome", "${it.nome}")
                                         context.startActivity(openStudents)

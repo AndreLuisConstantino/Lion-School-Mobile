@@ -9,4 +9,5 @@
     <string name="carga_horaria">1200h</string>
     <string name="nome_studant">1200h</string>
     <string name="title_activity_students">StudentsActivity</string>
+    <string name="title_activity_studant_grade">StudantGradeActivity</string>
 </resources>
